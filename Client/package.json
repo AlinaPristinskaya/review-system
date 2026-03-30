@@ -1,0 +1,8 @@
+{
+  "name": "progress-client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev-server.mjs"
+  }
+}
