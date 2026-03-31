@@ -1,6 +1,6 @@
-const API_BASE_URL = window.location.port === "3000"
-  ? `${window.location.protocol}//${window.location.hostname}:3001`
-  : "";
+import { getApiBaseUrl } from "./baseUrl";
+
+const API_BASE_URL = getApiBaseUrl();
 
 export async function fetchCategoryReviewHours() {
   const response = await fetch(`${API_BASE_URL}/api/category-review-hours`);
