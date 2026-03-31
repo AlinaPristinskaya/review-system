@@ -14,7 +14,8 @@ app.use(express.json());
 app.use((request, response, next) => {
   const allowedOrigins = new Set([
     "http://localhost:3000",
-    "http://127.0.0.1:3000"
+    "http://127.0.0.1:3000",
+    "https://alinapristinskaya.github.io"
   ]);
   const requestOrigin = request.headers.origin;
 
