@@ -10,17 +10,36 @@ loadServerEnv();
 const app = express();
 const port = Number(process.env.PORT || 3001);
 
+const allowedOrigins = new Set([
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://alinapristinskaya.github.io"
+]);
+
+function isAllowedOrigin(origin) {
+  if (!origin) {
+    return false;
+  }
+
+  if (allowedOrigins.has(origin)) {
+    return true;
+  }
+
+  // GitHub Pages always uses the github.io origin regardless of repo path.
+  if (/^https:\/\/[a-z0-9-]+\.github\.io$/i.test(origin)) {
+    return true;
+  }
+
+  return false;
+}
+
 app.use(express.json());
 app.use((request, response, next) => {
-  const allowedOrigins = new Set([
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://alinapristinskaya.github.io"
-  ]);
   const requestOrigin = request.headers.origin;
 
-  if (requestOrigin && allowedOrigins.has(requestOrigin)) {
+  if (isAllowedOrigin(requestOrigin)) {
     response.setHeader("Access-Control-Allow-Origin", requestOrigin);
+    response.setHeader("Vary", "Origin");
   }
 
   response.setHeader("Access-Control-Allow-Methods", "GET,PUT,OPTIONS");
