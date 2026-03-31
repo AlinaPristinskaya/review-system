@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "dependencies": {
     "express": "latest",
     "pg": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
